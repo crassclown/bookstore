@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/crassclown/bookstore/main"
+	"github.com/crassclown/bookstore/db"
 	"github.com/crassclown/bookstore/models"
 )
 
@@ -15,7 +15,7 @@ func ReturnAllBooks(w http.ResponseWriter, r *http.Request) {
 	var arrBooks []models.Books
 	var response models.BookResponse
 
-	db := main.Connect()
+	db := db.Connect()
 	defer db.Close()
 
 	rows, err := db.Query("Select id, title, description, author_id from books")

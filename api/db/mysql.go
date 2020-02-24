@@ -1,8 +1,11 @@
-package main
+package db
 
 import (
 	"database/sql"
 	"log"
+
+	//mysql driver
+	_ "github.com/go-sql-driver/mysql"
 )
 
 //Connect DB function
