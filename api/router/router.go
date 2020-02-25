@@ -1,6 +1,7 @@
 package router
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/crassclown/bookstore/action"
@@ -10,8 +11,10 @@ import (
 
 //Router function
 func Router() {
+	port := ":1234"
 	router := NewRouter()
-	http.ListenAndServe(":1234", router)
+	log.Println("Magic happens on port", port)
+	log.Fatal(http.ListenAndServe(port, router))
 }
 
 //NewRouter function
