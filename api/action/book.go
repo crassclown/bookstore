@@ -25,14 +25,14 @@ func ReturnAllBooks(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for rows.Next() {
-		if err := rows.Scan(&books.ID, &books.Title, &books.Description); err != nil {
+		if err := rows.Scan(&books.ID, &books.Title, &books.Description, &books.AuthorID); err != nil {
 			log.Fatal(err.Error())
 		} else {
 			arrBooks = append(arrBooks, books)
 		}
 	}
 
-	response.Status = 1
+	response.Status = 200
 	response.Message = "Success"
 	response.Data = arrBooks
 
