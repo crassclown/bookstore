@@ -21,7 +21,12 @@ func Router() {
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 
+	// book routes
 	router.HandleFunc("/books", action.ReturnAllBooks).Methods("GET")
+	// router.HandleFunc("/books", action.CreateBook).Methods("POST")
+
+	// author routes
 	router.HandleFunc("/authors", action.ReturnAllAuthors).Methods("GET")
+	// router.HandleFunc("/authors", action.CreateAuthor).Methods("POST")
 	return router
 }

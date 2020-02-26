@@ -32,8 +32,13 @@ func ReturnAllBooks(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	response.Status = 200
-	response.Message = "Success"
+	if len(arrBooks) > 0 {
+		response.Status = 200
+		response.Message = "Success"
+	} else {
+		response.Status = 404
+		response.Message = "Not Found"
+	}
 	response.Data = arrBooks
 
 	w.Header().Set("Content-Type", "application/json")
