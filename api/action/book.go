@@ -44,3 +44,41 @@ func ReturnAllBooks(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }
+
+// CreateBook function
+func CreateBook(w http.ResponseWriter, r *http.Request) {
+	var books models.Books
+	var arrBooks []models.Books
+	var response models.BookResponse
+
+	db := db.Connect()
+	defer db.Close()
+
+	err := r.ParseMultipartForm(4096)
+	if err != nil {
+		panic(err)
+	}
+
+	title := r.FormValue("title")
+	description := r.FormValue("description")
+	authorID := r.FormValue("author_id")
+
+	_, err := db.Exec("insert into books (title, description, author_id) values (?,?,?)", title, description, authorID)
+
+	if err != nil {
+		log.Print(err)
+	}
+
+	err = db.QueryRow("select LAST_INSERT_ID()").Scan(&books.ID)
+	if err != nil {
+		response.Status = 400
+		response.Message = "Bad Request"
+	} else {
+		response.Status = 200
+		response.Message = "Success"
+		response.Data = arrBooks
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}

@@ -27,6 +27,6 @@ func NewRouter() *mux.Router {
 
 	// author routes
 	router.HandleFunc("/authors", action.ReturnAllAuthors).Methods("GET")
-	// router.HandleFunc("/authors", action.CreateAuthor).Methods("POST")
+	router.HandleFunc("/authors", action.CreateAuthor).Methods("POST")
 	return router
 }
