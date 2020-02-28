@@ -63,7 +63,7 @@ func CreateBook(w http.ResponseWriter, r *http.Request) {
 	description := r.FormValue("description")
 	authorID := r.FormValue("author_id")
 
-	_, err := db.Exec("insert into books (title, description, author_id) values (?,?,?)", title, description, authorID)
+	_, err = db.Exec("insert into books (title, description, author_id) values (?,?,?)", title, description, authorID)
 
 	if err != nil {
 		log.Print(err)
