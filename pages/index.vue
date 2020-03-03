@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import env from '~/env.json'
 import axios from 'axios'
 export default {
   data: () => ({
@@ -75,7 +76,7 @@ export default {
   },
   methods: {
     getBooks() {
-      axios('http://localhost:1234/books', {
+      axios(''+env.BASE_URL_API+'/books', {
         crossDomain: true
       }).then(({data}) => {
         this.allItems = data.Data
