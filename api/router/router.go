@@ -7,14 +7,16 @@ import (
 	"github.com/crassclown/bookstore/action"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 //Router function
 func Router() {
 	port := ":1234"
 	router := NewRouter()
+	handler := cors.Default().Handler(router)
 	log.Println("Magic happens on port", port)
-	log.Fatal(http.ListenAndServe(port, router))
+	log.Fatal(http.ListenAndServe(port, handler))
 }
 
 //NewRouter function
