@@ -25,7 +25,7 @@ func NewRouter() *mux.Router {
 
 	// book routes
 	router.HandleFunc("/books", action.ReturnAllBooks).Methods("GET")
-	// router.HandleFunc("/books", action.CreateBook).Methods("POST")
+	router.HandleFunc("/books", action.CreateBook).Methods("POST")
 
 	// author routes
 	router.HandleFunc("/authors", action.ReturnAllAuthors).Methods("GET")
