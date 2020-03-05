@@ -4,7 +4,7 @@
     class="mx-auto"
   >
     <v-system-bar
-      color="pink darken-2"
+      color="pink"
       dark
     >
       <v-spacer></v-spacer>
@@ -56,6 +56,9 @@
           </v-card>
         </v-col>
       </v-row>
+      <div class="text-center">
+        <v-btn block color="primary" dark @click="loadMore">Load More</v-btn>
+      </div>
     </v-container>
   </v-card>
 </template>
@@ -67,6 +70,7 @@ export default {
   data: () => ({
     allItems: [],
     items: [],
+    current: 9
   }),
   mounted() {
     this.getBooks()
@@ -78,8 +82,19 @@ export default {
       }).then(({data}) => {
         this.allItems = data.Data
         data.Data.map((item, key) => {
-          this.items.push(item)
+          if(this.items.length < 9) {
+            this.items.push(item)
+          }
         })
+      }).catch((e) => {
+        error({ statusCode: 404, message: 'Books not found' })
+      })
+    },
+    loadMore() {
+      this.items = []
+      this.current += 9
+      this.allItems.map((item, key) => {
+        this.items.length < this.current ? this.items.push(item) : ''
       })
     }
   }
